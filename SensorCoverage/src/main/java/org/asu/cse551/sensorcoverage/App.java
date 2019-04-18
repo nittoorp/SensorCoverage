@@ -17,13 +17,13 @@ import org.asu.cse551.sensorcoverage.util.SensorUtil;
  * if you can't impress people with your intelligence , confuse them with your bullshit
  */
 public class App{
-	
+
 
 	public static void main( String[] args ){
-		
-		
+
+
 		try {
-			
+
 			File file = SensorUtil.getFileFromResources("input/input.txt");
 			FileReader in = new FileReader(file);
 			BufferedReader br = new BufferedReader(in);
@@ -50,7 +50,7 @@ public class App{
 					break;
 				}
 				else if(line.contains("NEXT")) {
-					
+
 					System.out.println();
 					currNodeID = 0 ;
 					range = Integer.parseInt(br.readLine());
@@ -68,46 +68,46 @@ public class App{
 					graph.addNode(currNodeID++, x, y);
 				}
 			}
-			
-			
+
+
 			System.out.println("\nPrinting connected graph");
 			PrintGraph.printGraph(graph);
 			System.out.println();
 			PrintGraph.printWeightMatrix(graph);
-			//DisplayGraph.display(graph);
-			
+			DisplayGraph.display(graph);
+
 			System.out.println("\nPrinting Spanning Tree");
-			
+
 			Graph spanningTree = PrimsAlgorithm.createSpanningTree(graph, 0);
-			
+
 			PrintGraph.printGraph(spanningTree);
 			System.out.println();
 			PrintGraph.printWeightMatrix(spanningTree);
-			//DisplayGraph.display(spanningTree);
-			
+			DisplayGraph.display(spanningTree);
+
 			//Algorithm - 4
 			Graph  copySpanningTreeMNCC  = CopyGraph.deepClone(spanningTree);
 			Graph mnccGraphs = MNCCAlgorithm.generateMNCCGraphs(copySpanningTreeMNCC, budget1);
 			System.out.println("\nPrinting MNCC Graphs");
-				PrintGraph.printGraph(mnccGraphs);
-				System.out.println();
-				PrintGraph.printWeightMatrix(mnccGraphs);
-				//DisplayGraph.display(g);
-				
-				//Algorithm - 5	
+			PrintGraph.printGraph(mnccGraphs);
+			System.out.println();
+			PrintGraph.printWeightMatrix(mnccGraphs);
+			DisplayGraph.display(mnccGraphs);
+
+			//Algorithm - 5	
 			Graph  copySpanningTreeMLCC  = CopyGraph.deepClone(spanningTree);
 			Graph mlccGraph = MLCCAlgorithm.generateMLCCGraph(copySpanningTreeMLCC, budget2);
 			System.out.println("\nPrinting MLCC Graph");
 			PrintGraph.printGraph(mlccGraph);
 			System.out.println();
 			PrintGraph.printWeightMatrix(mlccGraph);
-			//DisplayGraph.display(mlccGraph);
-			
+			DisplayGraph.display(mlccGraph);
+
 			in.close();
 			br.close();
 		}
 		catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();       
 		}
 	}
 }
