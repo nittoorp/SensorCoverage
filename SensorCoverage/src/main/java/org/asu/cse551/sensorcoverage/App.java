@@ -3,7 +3,6 @@ package org.asu.cse551.sensorcoverage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.List;
 
 import org.asu.cse551.sensorcoverage.graph.CopyGraph;
 import org.asu.cse551.sensorcoverage.graph.Graph;
@@ -16,6 +15,7 @@ import org.asu.cse551.sensorcoverage.util.SensorUtil;
 
 /*
  * if you can't impress people with your intelligence , confuse them with your bullshit
+ * @author : Amit Singh
  */
 public class App{
 	
@@ -78,7 +78,7 @@ public class App{
 			PrintGraph.printWeightMatrix(spanningTree);
 			//DisplayGraph.display(spanningTree);
 			
-			//Algorithm 4
+			//Algorithm - 4
 			Graph  copySpanningTreeMNCC  = CopyGraph.deepClone(spanningTree);
 			Graph mnccGraphs = MNCCAlgorithm.generateMNCCGraphs(copySpanningTreeMNCC, budget);
 			System.out.println("\nPrinting MNCC Graphs");
@@ -86,13 +86,15 @@ public class App{
 				System.out.println();
 				PrintGraph.printWeightMatrix(mnccGraphs);
 				//DisplayGraph.display(g);
-			
-			/*Graph mlccGraph = MLCCAlgorithm.generateMLCCGraph(spanningTree, budget);
+				
+				//Algorithm - 5	
+			Graph  copySpanningTreeMLCC  = CopyGraph.deepClone(spanningTree);
+			Graph mlccGraph = MLCCAlgorithm.generateMLCCGraph(copySpanningTreeMLCC, budget);
 			System.out.println("\nPrinting MLCC Graph");
 			PrintGraph.printGraph(mlccGraph);
 			System.out.println();
 			PrintGraph.printWeightMatrix(mlccGraph);
-			DisplayGraph.display(mlccGraph);*/
+			DisplayGraph.display(mlccGraph);
 			
 			in.close();
 			br.close();
