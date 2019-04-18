@@ -13,9 +13,7 @@ import org.asu.cse551.sensorcoverage.mncc.MNCCAlgorithm;
 import org.asu.cse551.sensorcoverage.ui.DisplayGraph;
 import org.asu.cse551.sensorcoverage.util.SensorUtil;
 
-/*
- * if you can't impress people with your intelligence , confuse them with your bullshit
- */
+
 public class App{
 
 
@@ -48,10 +46,12 @@ public class App{
 					continue;
 				}
 				else if(line.contains("END")) {
+					runAlgorithm(graph, numOfTestCase, budget1, budget2);
 					System.out.println("Finished reading the input file");
 					break;
 				}
 				else if(line.contains("NEXT")) {
+					runAlgorithm(graph, numOfTestCase, budget1, budget2);
 					numOfTestCase++;
 					currNodeID = 0 ;
 					range = Integer.parseInt(br.readLine());
@@ -70,45 +70,48 @@ public class App{
 				}
 			}
 
-
-			System.out.println("\nPrinting connected graph");
-			PrintGraph.printGraph(graph);
-			System.out.println();
-			PrintGraph.printWeightMatrix(graph);
-			DisplayGraph.display(graph,  "TestCase " + numOfTestCase + " - Input Connect Graph");
-
-			System.out.println("\nPrinting Spanning Tree");
-
-			Graph spanningTree = PrimsAlgorithm.createSpanningTree(graph, 0);
-
-			PrintGraph.printGraph(spanningTree);
-			System.out.println();
-			PrintGraph.printWeightMatrix(spanningTree);
-			DisplayGraph.display(spanningTree,"TestCase " + numOfTestCase + " - MST");
-
-			//Algorithm - 4
-			Graph  copySpanningTreeMNCC  = CopyGraph.deepClone(spanningTree);
-			Graph mnccGraphs = MNCCAlgorithm.generateMNCCGraphs(copySpanningTreeMNCC, budget1);
-			System.out.println("\nPrinting MNCC Graphs");
-			PrintGraph.printGraph(mnccGraphs);
-			System.out.println();
-			PrintGraph.printWeightMatrix(mnccGraphs);
-			DisplayGraph.display(mnccGraphs,"TestCase " + numOfTestCase + " - MNCC Graph");
-
-			//Algorithm - 5	
-			Graph  copySpanningTreeMLCC  = CopyGraph.deepClone(spanningTree);
-			Graph mlccGraph = MLCCAlgorithm.generateMLCCGraph(copySpanningTreeMLCC, budget2);
-			System.out.println("\nPrinting MLCC Graph");
-			PrintGraph.printGraph(mlccGraph);
-			System.out.println();
-			PrintGraph.printWeightMatrix(mlccGraph);
-			DisplayGraph.display(mlccGraph, "TestCase " + numOfTestCase + " - MLCC Graph");
-
 			in.close();
 			br.close();
 		}
 		catch(Exception e){
 			e.printStackTrace();       
 		}
+	}
+
+	public static void runAlgorithm(Graph graph, int numOfTestCase, double budget1, double budget2)  throws Exception{
+
+		System.out.println("\nPrinting connected graph");
+		PrintGraph.printGraph(graph);
+		System.out.println();
+		PrintGraph.printWeightMatrix(graph);
+		DisplayGraph.display(graph,  "TestCase " + numOfTestCase + " - Input Connect Graph");
+
+		System.out.println("\nPrinting Spanning Tree");
+
+		Graph spanningTree = PrimsAlgorithm.createSpanningTree(graph, 0);
+
+		PrintGraph.printGraph(spanningTree);
+		System.out.println();
+		PrintGraph.printWeightMatrix(spanningTree);
+		DisplayGraph.display(spanningTree,"TestCase " + numOfTestCase + " - MST");
+
+		//Algorithm - 4
+		Graph  copySpanningTreeMNCC  = CopyGraph.deepClone(spanningTree);
+		Graph mnccGraphs = MNCCAlgorithm.generateMNCCGraphs(copySpanningTreeMNCC, budget1);
+		System.out.println("\nPrinting MNCC Graphs");
+		PrintGraph.printGraph(mnccGraphs);
+		System.out.println();
+		PrintGraph.printWeightMatrix(mnccGraphs);
+		DisplayGraph.display(mnccGraphs,"TestCase " + numOfTestCase + " - MNCC Graph");
+
+		//Algorithm - 5	
+		Graph  copySpanningTreeMLCC  = CopyGraph.deepClone(spanningTree);
+		Graph mlccGraph = MLCCAlgorithm.generateMLCCGraph(copySpanningTreeMLCC, budget2);
+		System.out.println("\nPrinting MLCC Graph");
+		PrintGraph.printGraph(mlccGraph);
+		System.out.println();
+		PrintGraph.printWeightMatrix(mlccGraph);
+		DisplayGraph.display(mlccGraph, "TestCase " + numOfTestCase + " - MLCC Graph");
+
 	}
 }
