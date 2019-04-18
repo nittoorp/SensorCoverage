@@ -10,14 +10,15 @@ import org.asu.cse551.sensorcoverage.util.SensorUtil;
 public class Graph implements Serializable{
 
 	private static final long serialVersionUID = -828725917652137089L;
-	
-	
+
 	public int numOfNodes = 0 ;
 	public Map<Integer, Node> g = null;
 	public double[][] weightMatrix = null;
+	int range = 0;
 
-	public Graph(int numOfNodes) {
+	public Graph(int numOfNodes, int range) {
 		this.numOfNodes = numOfNodes;
+		this.range = range;
 		g = new HashMap<>();
 		weightMatrix = new double[numOfNodes][numOfNodes];
 	}
@@ -57,7 +58,7 @@ public class Graph implements Serializable{
 			int y1 = src.getyCordinate();
 			int y2 = dest.getyCordinate();
 
-			weightMatrix[src.getId()][dest.getId()] = SensorUtil.calculateEuclidianDistance(x1, x2, y1, y2);
+			weightMatrix[src.getId()][dest.getId()] = SensorUtil.calculateEuclidianDistance(x1, x2, y1, y2, range);
 		}
 	}
 	

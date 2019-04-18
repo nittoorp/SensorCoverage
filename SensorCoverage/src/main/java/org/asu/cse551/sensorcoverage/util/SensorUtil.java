@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 
 public class SensorUtil {
 
-	public static double calculateEuclidianDistance(int x1, int x2, int y1, int y2) {
+	public static double calculateEuclidianDistance(int x1, int x2, int y1, int y2, int range) {
 		int xDiff = x2 - x1;
 		int yDiff = y2 - y1;
 
@@ -15,6 +15,7 @@ public class SensorUtil {
 
 		double distance = Math.sqrt(xDiffSqr+yDiffSqr);
 		distance = formatNumber(distance);
+		distance = (distance /range) - 1;
 		return distance;
 
 	}

@@ -15,7 +15,6 @@ import org.asu.cse551.sensorcoverage.util.SensorUtil;
 
 /*
  * if you can't impress people with your intelligence , confuse them with your bullshit
- * @author : Amit Singh
  */
 public class App{
 	
@@ -30,16 +29,20 @@ public class App{
 			BufferedReader br = new BufferedReader(in);
 
 			Graph graph = null;
-			double budget = 0.0;
+			int range = 0;
+			double budget1 = 0.0;
+			double budget2 = 0.0;
 			String line;
 			int currNodeID = 0 ;
 			while ((line = br.readLine()) != null) {
 				if(line.contains("START")) {
 					System.out.println("Started reading the input file");
 					currNodeID = 0 ;
-					budget = Integer.parseInt(br.readLine());
+					range = Integer.parseInt(br.readLine());
+					budget1 = Integer.parseInt(br.readLine());
+					budget2 = Integer.parseInt(br.readLine());
 					int numOfVertices = Integer.parseInt(br.readLine());
-					graph = new Graph(numOfVertices);
+					graph = new Graph(numOfVertices, range);
 					continue;
 				}
 				else if(line.contains("END")) {
@@ -50,9 +53,11 @@ public class App{
 					
 					System.out.println();
 					currNodeID = 0 ;
-					budget = Integer.parseInt(br.readLine());
+					range = Integer.parseInt(br.readLine());
+					budget1 = Integer.parseInt(br.readLine());
+					budget2 = Integer.parseInt(br.readLine());
 					int numOfVertices = Integer.parseInt(br.readLine());
-					graph = new Graph(numOfVertices);
+					graph = new Graph(numOfVertices, range);
 					continue;
 				}
 
@@ -63,6 +68,8 @@ public class App{
 					graph.addNode(currNodeID++, x, y);
 				}
 			}
+			
+			
 			System.out.println("\nPrinting connected graph");
 			PrintGraph.printGraph(graph);
 			System.out.println();
@@ -80,7 +87,7 @@ public class App{
 			
 			//Algorithm - 4
 			Graph  copySpanningTreeMNCC  = CopyGraph.deepClone(spanningTree);
-			Graph mnccGraphs = MNCCAlgorithm.generateMNCCGraphs(copySpanningTreeMNCC, budget);
+			Graph mnccGraphs = MNCCAlgorithm.generateMNCCGraphs(copySpanningTreeMNCC, budget1);
 			System.out.println("\nPrinting MNCC Graphs");
 				PrintGraph.printGraph(mnccGraphs);
 				System.out.println();
@@ -89,12 +96,12 @@ public class App{
 				
 				//Algorithm - 5	
 			Graph  copySpanningTreeMLCC  = CopyGraph.deepClone(spanningTree);
-			Graph mlccGraph = MLCCAlgorithm.generateMLCCGraph(copySpanningTreeMLCC, budget);
+			Graph mlccGraph = MLCCAlgorithm.generateMLCCGraph(copySpanningTreeMLCC, budget2);
 			System.out.println("\nPrinting MLCC Graph");
 			PrintGraph.printGraph(mlccGraph);
 			System.out.println();
 			PrintGraph.printWeightMatrix(mlccGraph);
-			DisplayGraph.display(mlccGraph);
+			//DisplayGraph.display(mlccGraph);
 			
 			in.close();
 			br.close();

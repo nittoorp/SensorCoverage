@@ -62,7 +62,7 @@ public class PrimsAlgorithm {
 
 		}
 
-		Graph spanTree = new Graph(graph.numOfNodes);
+		Graph spanTree = new Graph(graph.numOfNodes, graph.range);
 
 		Set<Map.Entry<Integer, DistanceInfo>> set = map.entrySet();
 		Iterator<Map.Entry<Integer, DistanceInfo>> itr = set.iterator();
