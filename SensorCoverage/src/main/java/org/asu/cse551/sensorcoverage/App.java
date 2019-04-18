@@ -34,8 +34,10 @@ public class App{
 			double budget2 = 0.0;
 			String line;
 			int currNodeID = 0 ;
+			int numOfTestCase = 0;
 			while ((line = br.readLine()) != null) {
 				if(line.contains("START")) {
+					numOfTestCase++;
 					System.out.println("Started reading the input file");
 					currNodeID = 0 ;
 					range = Integer.parseInt(br.readLine());
@@ -50,8 +52,7 @@ public class App{
 					break;
 				}
 				else if(line.contains("NEXT")) {
-
-					System.out.println();
+					numOfTestCase++;
 					currNodeID = 0 ;
 					range = Integer.parseInt(br.readLine());
 					budget1 = Integer.parseInt(br.readLine());
@@ -74,7 +75,7 @@ public class App{
 			PrintGraph.printGraph(graph);
 			System.out.println();
 			PrintGraph.printWeightMatrix(graph);
-			DisplayGraph.display(graph);
+			DisplayGraph.display(graph,  "TestCase " + numOfTestCase + " - Input Connect Graph");
 
 			System.out.println("\nPrinting Spanning Tree");
 
@@ -83,7 +84,7 @@ public class App{
 			PrintGraph.printGraph(spanningTree);
 			System.out.println();
 			PrintGraph.printWeightMatrix(spanningTree);
-			DisplayGraph.display(spanningTree);
+			DisplayGraph.display(spanningTree,"TestCase " + numOfTestCase + " - MST");
 
 			//Algorithm - 4
 			Graph  copySpanningTreeMNCC  = CopyGraph.deepClone(spanningTree);
@@ -92,7 +93,7 @@ public class App{
 			PrintGraph.printGraph(mnccGraphs);
 			System.out.println();
 			PrintGraph.printWeightMatrix(mnccGraphs);
-			DisplayGraph.display(mnccGraphs);
+			DisplayGraph.display(mnccGraphs,"TestCase " + numOfTestCase + " - MNCC Graph");
 
 			//Algorithm - 5	
 			Graph  copySpanningTreeMLCC  = CopyGraph.deepClone(spanningTree);
@@ -101,7 +102,7 @@ public class App{
 			PrintGraph.printGraph(mlccGraph);
 			System.out.println();
 			PrintGraph.printWeightMatrix(mlccGraph);
-			DisplayGraph.display(mlccGraph);
+			DisplayGraph.display(mlccGraph, "TestCase " + numOfTestCase + " - MLCC Graph");
 
 			in.close();
 			br.close();

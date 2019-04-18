@@ -12,7 +12,7 @@ public class DisplayGraph {
 
 
 
-	public static void display(org.asu.cse551.sensorcoverage.graph.Graph g) throws Exception {
+	public static void display(org.asu.cse551.sensorcoverage.graph.Graph g, String outputFileName) throws Exception {
 
 		Graph graph = new MultiGraph("Connected Sensor Graph");
 		graph.addAttribute("ui.stylesheet", styleSheet);
@@ -49,7 +49,7 @@ public class DisplayGraph {
 		}
 		graph.display();
 		Thread.sleep(2000);
-		graph.addAttribute("ui.screenshot", "screenshot.png");
+		graph.addAttribute("ui.screenshot", outputFileName);
 	}
 
 	public static String getGSGraphNodeLabel(org.asu.cse551.sensorcoverage.graph.Node curr) {
