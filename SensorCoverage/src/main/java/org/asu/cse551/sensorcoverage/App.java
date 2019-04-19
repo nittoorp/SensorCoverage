@@ -19,7 +19,6 @@ public class App{
 
 	public static void main( String[] args ){
 
-
 		try {
 
 			File file = SensorUtil.getFileFromResources("input/input.txt");
@@ -84,7 +83,7 @@ public class App{
 		PrintGraph.printGraph(graph);
 		System.out.println();
 		PrintGraph.printWeightMatrix(graph);
-		DisplayGraph.display(graph,  "TestCase " + numOfTestCase + " - Input Connect Graph");
+		DisplayGraph.display(graph,  "TestCase " + numOfTestCase + " - Input Connect Graph.png");
 
 		System.out.println("\nPrinting Spanning Tree");
 
@@ -93,7 +92,7 @@ public class App{
 		PrintGraph.printGraph(spanningTree);
 		System.out.println();
 		PrintGraph.printWeightMatrix(spanningTree);
-		DisplayGraph.display(spanningTree,"TestCase " + numOfTestCase + " - MST");
+		DisplayGraph.display(spanningTree,"TestCase " + numOfTestCase + " - MST.png");
 
 		//Algorithm - 4
 		Graph  copySpanningTreeMNCC  = CopyGraph.deepClone(spanningTree);
@@ -102,7 +101,7 @@ public class App{
 		PrintGraph.printGraph(mnccGraphs);
 		System.out.println();
 		PrintGraph.printWeightMatrix(mnccGraphs);
-		DisplayGraph.display(mnccGraphs,"TestCase " + numOfTestCase + " - MNCC Graph");
+		DisplayGraph.display(mnccGraphs,"TestCase " + numOfTestCase + " - MNCC Graph.png");
 
 		//Algorithm - 5	
 		Graph  copySpanningTreeMLCC  = CopyGraph.deepClone(spanningTree);
@@ -111,7 +110,7 @@ public class App{
 		PrintGraph.printGraph(mlccGraph);
 		System.out.println();
 		PrintGraph.printWeightMatrix(mlccGraph);
-		DisplayGraph.display(mlccGraph, "TestCase " + numOfTestCase + " - MLCC Graph");
+		DisplayGraph.display(mlccGraph, "TestCase " + numOfTestCase + " - MLCC Graph.png");
 
 	}
 }
